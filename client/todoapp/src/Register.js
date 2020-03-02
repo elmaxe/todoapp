@@ -72,7 +72,7 @@ class Register extends React.Component {
                 <form className="LoginForm">
                     <h1>Register</h1>
                     {error && <Alert type="danger" text={error}/>}
-                    {success && <Alert type="success" text={success}/>}
+                    {success && <Alert type="success" text={success + " "} linkText="Login." linkPath={ROUTES.LOGIN} />}
                     <label>Username</label>
                     <input
                         className="inputBox"

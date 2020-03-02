@@ -16,3 +16,20 @@
     border-radius: 8px;
     margin: 10px;
 }
+
+.box a:link {
+    text-decoration: none;
+    color: blue;
+}
+.box a:visited {
+    text-decoration: none;
+    color: blue;
+}
+.box a:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
+.box a:active {
+    color: blue;
+}
