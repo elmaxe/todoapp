@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
                     //Insert hash and username
                     st.run([username, hash]);
                     st.finalize();
-                    res.status(200).json({"status":"User succesfully registered"})
+                    res.status(200).json({"status":"Account registered."})
                 })
             })
 
