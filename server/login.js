@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
         }
 
         if (row === undefined) {
-            res.status(404).json({"error":"Username or password wrong."})
+            res.status(404).json({"error":"Wrong username or password."})
             return
         }
 
