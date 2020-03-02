@@ -6,7 +6,8 @@ import * as ROUTES from './routes'
 
 const initState = {
     username: '',
-    password: ''
+    password: '',
+    fetching: false
 }
 
 
@@ -33,6 +34,8 @@ class Login extends React.Component {
 
         const body = JSON.stringify({username, password})
 
+        this.setState({fetching: true})
+
         fetch("http://localhost:4000/login", {
             method: "POST",    
             headers: {
@@ -45,6 +48,8 @@ class Login extends React.Component {
             console.log(json)
             if (!json.error) {
                 this.setState({...initState})
+            } else {
+                this.setState({fetching: false})
             }
         })
         .catch(err => {
@@ -53,7 +58,7 @@ class Login extends React.Component {
     }
 
     render() {
-        const {username, password} = this.state;
+        const {username, password, fetching} = this.state;
 
         const isInvalid = username === '' || password === ''
 
@@ -79,7 +84,7 @@ class Login extends React.Component {
                     />
                     <button className="LoginButton"
                         onClick={this.handleSubmit}
-                        disabled={isInvalid}
+                        disabled={isInvalid || fetching}
                     >
                         Login
                     </button>

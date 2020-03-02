@@ -1,9 +1,14 @@
 import React from 'react'
 
+import './Login.css'
+import {Link} from 'react-router-dom'
+import * as ROUTES from './routes'
+
 const initState = {
     username: '',
     password: '',
     password2: '',
+    fetching: false
 }
 
 class Register extends React.Component {
@@ -28,6 +33,8 @@ class Register extends React.Component {
         
         const body = JSON.stringify({username, password})
 
+        this.setState({fetching: true})
+
         fetch('http://localhost:4000/register', {
             method: "POST",
             headers: {
@@ -40,6 +47,8 @@ class Register extends React.Component {
             console.log(json)
             if (!json.error) {
                 this.setState({...initState})
+            } else {
+                this.setState({fetching:false})
             }
         })
         .catch(error => {
@@ -49,14 +58,16 @@ class Register extends React.Component {
 
     render() {
 
-        const {username, password, password2} = this.state;
+        const {username, password, password2, fetching} = this.state;
 
         const isInvalid = username === '' || password === '' || password2 === '' || password !== password2;
 
         return (
-            <div>
-                <form>
-                    <input 
+            <div className="Login">
+                <form className="LoginForm">
+                    <h1>Register</h1>
+                    <input
+                        id="inputBox"
                         type="text"
                         name="username"
                         value={username}
@@ -64,6 +75,7 @@ class Register extends React.Component {
                         onChange={this.handleChange}
                     />
                     <input 
+                        id="inputBox"
                         type="password"
                         name="password"
                         value={password}
@@ -71,18 +83,21 @@ class Register extends React.Component {
                         onChange={this.handleChange}
                     />
                     <input 
+                        id="inputBox"
                         type="password"
                         name="password2"
                         value={password2}
-                        placeholder="Confirm"
+                        placeholder="Confirm password"
                         onChange={this.handleChange}
                     />
                     <button
+                        className="LoginButton"
                         onClick={this.handleSubmit}
-                        disabled={isInvalid}
+                        disabled={isInvalid || fetching}
                     >
-                        Sign up
+                        Register
                     </button>
+                    <span className="Links"><Link to={ROUTES.LOGIN}>Login</Link></span>
                 </form>
             </div>
         )
