@@ -11,8 +11,8 @@ db.serialize(() => {
     db.run('DROP TABLE IF EXISTS User');
     db.run(userTable);
 
-    const st = db.prepare('INSERT INTO User (username, password) VALUES (?, ?)')
-    st.run(["sara", "hej1234"])
+    // const st = db.prepare('INSERT INTO User (username, password) VALUES (?, ?)')
+    // st.run(["sara", "hej1234"])
 });
 
 module.exports = db;
