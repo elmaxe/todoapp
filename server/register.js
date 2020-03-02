@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
             })
 
         } else {
-            res.status(404).json({"error":"User already exists"})
+            res.status(403).json({"error":"User already exists"})
         }
     })
 })
