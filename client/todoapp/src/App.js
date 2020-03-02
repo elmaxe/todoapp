@@ -1,26 +1,74 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const initState = {
+    username: '',
+    password: ''
+}
+
+class App extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = initState
+
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    handleChange(e) {
+        this.setState({
+            [e.target.name]:e.target.value
+        })
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const {username, password} = this.state
+        
+        const body = JSON.stringify({username, password})
+
+        fetch('http://localhost:4000/register', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body
+        })
+        .then(response => response.json())
+        .then(json => console.log(json))
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
+    render() {
+
+        const {username, password} = this.state;
+
+        return (
+            <div>
+                <form>
+                    <input 
+                        type="text"
+                        name="username"
+                        value={username}
+                        placeholder="Username"
+                        onChange={this.handleChange}
+                    />
+                    <input 
+                        type="password"
+                        name="password"
+                        value={password}
+                        placeholder="Password"
+                        onChange={this.handleChange}
+                    />
+                    <button onClick={this.handleSubmit}>
+                        Sign up
+                    </button>
+                </form>
+            </div>
+        )
+    }
 }
 
 export default App;
