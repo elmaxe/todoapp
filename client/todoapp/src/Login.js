@@ -4,10 +4,13 @@ import {Link} from 'react-router-dom'
 import './Login.css'
 import * as ROUTES from './routes'
 
+import Alert from './Alert'
+
 const initState = {
     username: '',
     password: '',
-    fetching: false
+    fetching: false,
+    error: ''
 }
 
 
@@ -49,7 +52,7 @@ class Login extends React.Component {
             if (!json.error) {
                 this.setState({...initState})
             } else {
-                this.setState({fetching: false})
+                this.setState({fetching: false, error: json.error})
             }
         })
         .catch(err => {
@@ -58,7 +61,7 @@ class Login extends React.Component {
     }
 
     render() {
-        const {username, password, fetching} = this.state;
+        const {username, password, fetching, error} = this.state;
 
         const isInvalid = username === '' || password === ''
 
@@ -66,6 +69,7 @@ class Login extends React.Component {
             <div className="Login">
                 <form className="LoginForm">
                 <h1>Login</h1>
+                    {error && <Alert type="danger" text={error} />}
                     <input
                         id="inputBox"
                         type="text"

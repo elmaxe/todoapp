@@ -1,0 +1,17 @@
+
+.danger {
+    background-color: rgb(247, 216, 218);
+    color: rgb(112, 32, 37);
+    border: 2px solid rgb(112, 32, 37);
+}
+
+.success {
+    background-color:rgb(212, 237, 218);
+    color: rgb(20, 88, 38);
+    border: 2px solid rgb(20, 88, 38);
+}
+
+.box {
+    padding: 3%;
+    border-radius: 10px;
+}

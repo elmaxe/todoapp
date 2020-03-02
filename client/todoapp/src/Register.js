@@ -3,12 +3,15 @@ import React from 'react'
 import './Login.css'
 import {Link} from 'react-router-dom'
 import * as ROUTES from './routes'
+import Alert from './Alert'
 
 const initState = {
     username: '',
     password: '',
     password2: '',
-    fetching: false
+    fetching: false,
+    error: '',
+    success: ''
 }
 
 class Register extends React.Component {
@@ -33,7 +36,7 @@ class Register extends React.Component {
         
         const body = JSON.stringify({username, password})
 
-        this.setState({fetching: true})
+        this.setState({fetching: true, error:'', success:''})
 
         fetch('http://localhost:4000/register', {
             method: "POST",
@@ -46,9 +49,11 @@ class Register extends React.Component {
         .then(json => {
             console.log(json)
             if (!json.error) {
-                this.setState({...initState})
+                this.setState(() => ({...initState}), () => {
+                    this.setState({success: json.status})
+                })
             } else {
-                this.setState({fetching:false})
+                this.setState({fetching:false, error: json.error})
             }
         })
         .catch(error => {
@@ -58,7 +63,7 @@ class Register extends React.Component {
 
     render() {
 
-        const {username, password, password2, fetching} = this.state;
+        const {username, password, password2, fetching, error, success} = this.state;
 
         const isInvalid = username === '' || password === '' || password2 === '' || password !== password2;
 
@@ -66,6 +71,8 @@ class Register extends React.Component {
             <div className="Login">
                 <form className="LoginForm">
                     <h1>Register</h1>
+                    {error && <Alert type="danger" text={error}/>}
+                    {success && <Alert type="success" text={success}/>}
                     <input
                         id="inputBox"
                         type="text"
