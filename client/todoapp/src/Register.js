@@ -74,7 +74,7 @@ class Register extends React.Component {
                     {error && <Alert type="danger" text={error}/>}
                     {success && <Alert type="success" text={success}/>}
                     <input
-                        id="inputBox"
+                        className="inputBox"
                         type="text"
                         name="username"
                         value={username}
@@ -82,7 +82,7 @@ class Register extends React.Component {
                         onChange={this.handleChange}
                     />
                     <input 
-                        id="inputBox"
+                        className="inputBox"
                         type="password"
                         name="password"
                         value={password}
@@ -90,7 +90,7 @@ class Register extends React.Component {
                         onChange={this.handleChange}
                     />
                     <input 
-                        id="inputBox"
+                        className="inputBox"
                         type="password"
                         name="password2"
                         value={password2}

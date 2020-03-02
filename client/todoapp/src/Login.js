@@ -71,7 +71,7 @@ class Login extends React.Component {
                 <h1>Login</h1>
                     {error && <Alert type="danger" text={error} />}
                     <input
-                        id="inputBox"
+                        className="inputBox"
                         type="text"
                         name="username"
                         value={username}
@@ -79,7 +79,7 @@ class Login extends React.Component {
                         onChange={this.handleChange}
                     />
                     <input 
-                        id="inputBox"
+                        className="inputBox"
                         type="password"
                         name="password"
                         value={password}
