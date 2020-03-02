@@ -2,13 +2,13 @@
 .danger {
     background-color: rgb(247, 216, 218);
     color: rgb(112, 32, 37);
-    border: 2px solid rgb(112, 32, 37);
+    border: 1px solid rgb(243, 199, 203);
 }
 
 .success {
     background-color:rgb(212, 237, 218);
     color: rgb(20, 88, 38);
-    border: 2px solid rgb(20, 88, 38);
+    border: 2px solid rgb(195, 230, 204);
 }
 
 .box {
