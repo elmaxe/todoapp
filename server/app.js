@@ -2,7 +2,7 @@
 
 const path = require('path');
 const express = require('express'); 
-// const db = require('./database');
+const db = require('./database');
 
 const port = 4000;
 
@@ -27,11 +27,18 @@ app.use(express.urlencoded({
     extended: true,
 }));
 
+const login = require('./login')
+const register = require('./register')
+
 app.listen(port, () => {
     console.info(`Listening on port ${port}!`);
 });
 
-
-app.get("/", (req, res) => {
-    res.send("HEJSAN PÅ DEJSAN")
+app.get('/users', (req, res) => {
+    db.all('SELECT * FROM User', (err, rows) => {
+        res.send(rows)
+    })
 })
+
+app.use('/login', login)
+app.use('/register', register)
