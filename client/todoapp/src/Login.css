@@ -1,5 +1,8 @@
 .Login {
     width: 50vh;
+    border: 2px solid rgb(207, 212, 218);
+    border-radius: 15px;
+    background-color: white;
     /* margin: auto; */
 }
 
@@ -9,18 +12,70 @@
 }
 
 .LoginButton {
-    width: 100%;
-    margin: 1%;
+    width: 42.5vh;
+    margin: 2%;
     font-size: medium;
+    font-weight: bold;
+    background-color: rgb(40, 89, 177);
+    
+    border:1px solid rgb(30, 79, 167);
+    border-radius: 5px;
+    padding: 12px;
+    color: white;
+}
+
+.LoginButton:disabled:hover {
+    background-color: cornflowerblue;
+    border:1px solid cornflowerblue;
+}
+.LoginButton:disabled {
+    background-color: cornflowerblue;
+    border:1px solid cornflowerblue;
+}
+.LoginButton:hover {
+    background-color: rgb(30, 79, 167);
+    cursor: pointer;
+    border:1px solid rgb(10, 59, 147);
 }
 
 
 .inputBox {
-    margin: 1%;
-    width: 100%;
+    margin: 2%;
+    width: 40vh;
     font-size: large;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid rgb(207, 212, 218);
+    
+}
+
+.inputBox:focus {
+    box-shadow: 0 0 5px rgb(30, 79, 167);
+}
+
+label {
+    margin: 10px;
 }
 
 .Links {
-    padding: 1%;
+    padding: 3%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.Links a:link {
+    text-decoration: none;
+    color: blue;
+}
+.Links a:visited {
+    text-decoration: none;
+    color: blue;
+}
+.Links a:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
+.Links a:active {
+    color: blue;
 }

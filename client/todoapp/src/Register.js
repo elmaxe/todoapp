@@ -91,7 +91,7 @@ class Register extends React.Component {
                         placeholder="Password"
                         onChange={this.handleChange}
                     />
-                    <label>Confirm password</label>
+                    <span><label>Confirm password</label></span>
                     <input 
                         className="inputBox"
                         type="password"
@@ -105,9 +105,9 @@ class Register extends React.Component {
                         onClick={this.handleSubmit}
                         disabled={isInvalid || fetching}
                     >
-                        Register
+                        {fetching ? "Registering..." : "Register"}
                     </button>
-                    <span className="Links"><Link to={ROUTES.LOGIN}>Login</Link></span>
+                    <div className="Links">Already have an account? <Link to={ROUTES.LOGIN}>Login.</Link></div>
                 </form>
             </div>
         )

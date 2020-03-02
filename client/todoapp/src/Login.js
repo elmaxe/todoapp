@@ -92,9 +92,9 @@ class Login extends React.Component {
                         onClick={this.handleSubmit}
                         disabled={isInvalid || fetching}
                     >
-                        Login
+                        {fetching ? "Logging in..." : "Login"}
                     </button>
-                <span className="Links"><Link to={ROUTES.REGISTER}>Register</Link></span>
+                <div className="Links">Don't have an account? <Link to={ROUTES.REGISTER}>Register.</Link></div>
                 </form>
             </div>
         )
