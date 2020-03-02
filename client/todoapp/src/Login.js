@@ -1,9 +1,14 @@
 import React from 'react'
 
+import {Link} from 'react-router-dom'
+import './Login.css'
+import * as ROUTES from './routes'
+
 const initState = {
     username: '',
     password: ''
 }
+
 
 class Login extends React.Component {
     constructor(props) {
@@ -53,9 +58,11 @@ class Login extends React.Component {
         const isInvalid = username === '' || password === ''
 
         return (
-            <div>
-                <form>
-                    <input 
+            <div className="Login">
+                <form className="LoginForm">
+                <h1>Login</h1>
+                    <input
+                        id="inputBox"
                         type="text"
                         name="username"
                         value={username}
@@ -63,18 +70,20 @@ class Login extends React.Component {
                         onChange={this.handleChange}
                     />
                     <input 
+                        id="inputBox"
                         type="password"
                         name="password"
                         value={password}
                         placeholder="Password"
                         onChange={this.handleChange}
                     />
-                    <button
+                    <button className="LoginButton"
                         onClick={this.handleSubmit}
                         disabled={isInvalid}
                     >
-                        Sign in
+                        Login
                     </button>
+                <span className="Links"><Link to={ROUTES.REGISTER}>Register</Link></span>
                 </form>
             </div>
         )

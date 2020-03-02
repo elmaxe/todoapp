@@ -1,6 +1,8 @@
 import React from 'react'
 
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
+
+import './App.css'
 
 import Register from './Register'
 import Login from './Login'
@@ -10,9 +12,12 @@ import * as ROUTES from './routes'
 
 const App = () => {
     return (
-        <div>
+        <div className="App fill-window">
             <BrowserRouter>
                 <Switch>
+                    <Route exact path={ROUTES.HOME}>
+                        <Redirect to={ROUTES.LOGIN}/>
+                    </Route>
                     <Route exact path={ROUTES.LOGIN}>
                         <Login />
                     </Route>
