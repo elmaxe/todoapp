@@ -70,6 +70,7 @@ class Login extends React.Component {
                 <form className="LoginForm">
                 <h1>Login</h1>
                     {error && <Alert type="danger" text={error} />}
+                    <label>Username</label>
                     <input
                         className="inputBox"
                         type="text"
@@ -78,6 +79,7 @@ class Login extends React.Component {
                         placeholder="Username"
                         onChange={this.handleChange}
                     />
+                    <label>Password</label>
                     <input 
                         className="inputBox"
                         type="password"
