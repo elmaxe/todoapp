@@ -3,6 +3,9 @@
 var express = require('express')
 var router = express.Router()
 const db = require('./database')
+const bcrypt = require('bcrypt')
+
+const saltRounds = 12;
 
 router.post('/', (req, res) => {
     const {username, password} = req.body
@@ -11,20 +14,36 @@ router.post('/', (req, res) => {
     //Register email instead?
     //or lowercase all usernames in database
 
+    //TODO2
+    //Hash password
+
     db.get('SELECT * FROM User WHERE username = ?', [username], (err, row) => {
         if (row === undefined) {
 
             const st = db.prepare('INSERT INTO User (username, password) VALUES (?, ?)');
-            st.run([username, password]);
-            st.finalize();
 
-            res.status(200).json({"status":"User succesfully registered"})
+            bcrypt.genSalt(saltRounds, (err, salt) => {
+                if (err) {
+                    res.status(500).json({"error":"Something went wrong when hashing."})
+                    return;
+                }
+
+                bcrypt.hash(password, salt, (err, hash) => {
+                    if (err) {
+                        res.status(500).json({"error":"Something went wrong when hashing."})
+                        return;
+                    }
+                    //Insert hash and username
+                    st.run([username, hash]);
+                    st.finalize();
+                    res.status(200).json({"status":"User succesfully registered"})
+                })
+            })
 
         } else {
             res.status(404).json({"error":"User already exists"})
         }
     })
-    
 })
 
 module.exports = router
