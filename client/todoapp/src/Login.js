@@ -2,15 +2,14 @@ import React from 'react'
 
 const initState = {
     username: '',
-    password: '',
-    password2: '',
+    password: ''
 }
 
-class Register extends React.Component {
+class Login extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
 
-        this.state = initState
+        this.state = initState;
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -18,40 +17,40 @@ class Register extends React.Component {
 
     handleChange(e) {
         this.setState({
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
     handleSubmit(e) {
         e.preventDefault();
+
         const {username, password} = this.state
-        
+
         const body = JSON.stringify({username, password})
 
-        fetch('http://localhost:4000/register', {
-            method: "POST",
+        fetch("http://localhost:4000/login", {
+            method: "POST",    
             headers: {
                 "Content-Type": "application/json"
             },
             body
         })
-        .then(response => response.json())
+        .then(res => res.json())
         .then(json => {
             console.log(json)
             if (!json.error) {
                 this.setState({...initState})
             }
         })
-        .catch(error => {
-            console.log(error)
+        .catch(err => {
+            console.log(err)
         })
     }
 
     render() {
+        const {username, password} = this.state;
 
-        const {username, password, password2} = this.state;
-
-        const isInvalid = username === '' || password === '' || password2 === '' || password !== password2;
+        const isInvalid = username === '' || password === ''
 
         return (
             <div>
@@ -70,18 +69,11 @@ class Register extends React.Component {
                         placeholder="Password"
                         onChange={this.handleChange}
                     />
-                    <input 
-                        type="password"
-                        name="password2"
-                        value={password2}
-                        placeholder="Confirm"
-                        onChange={this.handleChange}
-                    />
                     <button
                         onClick={this.handleSubmit}
                         disabled={isInvalid}
                     >
-                        Sign up
+                        Sign in
                     </button>
                 </form>
             </div>
@@ -89,4 +81,4 @@ class Register extends React.Component {
     }
 }
 
-export default Register;
+export default Login
