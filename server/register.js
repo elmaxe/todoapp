@@ -14,10 +14,13 @@ router.post('/', (req, res) => {
     //Register email instead?
     //or lowercase all usernames in database
 
-    //TODO2
-    //Hash password
-
     db.get('SELECT * FROM User WHERE username = ?', [username], (err, row) => {
+        if (err) {
+            res.status(500).json({"error":"Database error"})
+            console.log(err)
+            return
+        }
+
         if (row === undefined) {
 
             const st = db.prepare('INSERT INTO User (username, password) VALUES (?, ?)');
