@@ -27,12 +27,14 @@ router.post('/', (req, res) => {
 
             bcrypt.genSalt(saltRounds, (err, salt) => {
                 if (err) {
+                    console.log(err)
                     res.status(500).json({"error":"Something went wrong when hashing."})
                     return;
                 }
 
-                bcrypt.hash(password, salt, (err, hash) => {
-                    if (err) {
+                bcrypt.hash(password, salt, (err2, hash) => {
+                    if (err2) {
+                        console.log(err2)
                         res.status(500).json({"error":"Something went wrong when hashing."})
                         return;
                     }
