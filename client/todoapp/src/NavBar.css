@@ -1,0 +1,47 @@
+.NavBar {
+    width: 100%;
+    margin: auto;
+    position: sticky;
+}
+
+/* https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_black */
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: cornflowerblue;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+  }
+
+ul span {
+  background-color: rgb(50, 99, 187);
+}
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li span {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  li a:hover {
+    background-color: rgb(50, 99, 187);
+  }
