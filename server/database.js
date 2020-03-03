@@ -17,6 +17,10 @@ db.serialize(() => {
     db.run(todoTable);
 
     // DEBUG
+    const hej = db.prepare('INSERT INTO User (username) VALUES (?)');
+    hej.run(["Sara"]);
+    hej.finalize();
+
     const st = db.prepare('INSERT INTO Todos (title, description, date) VALUES (?, ?, ?)');
     st.run(["Gör saker", "Ska göra det här: [insert lista]", "2020-03-03"]);
     st.finalize();
