@@ -6,13 +6,20 @@ const db = new sqlite3.Database(databasePath);
 
 // Auto increment automatically increments the id entry, there is no need to supply it a value.
 const userTable = 'CREATE TABLE User (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)';
+const todoTable = 'CREATE TABLE Todos (id INTEGER PRIMARY KEY AUTOINCREMENT, userID TEXT, \
+                    title TEXT, description TEXT, date TEXT, FOREIGN KEY(userID) REFERENCES \
+                    User(id) ON DELETE CASCADE)';  // userID should be integer, TEXT for debug
 
 db.serialize(() => {
     db.run('DROP TABLE IF EXISTS User');
+    db.run('DROP TABLE IF EXISTS Todos');
     db.run(userTable);
+    db.run(todoTable);
 
-    // const st = db.prepare('INSERT INTO User (username, password) VALUES (?, ?)')
-    // st.run(["sara", "hej1234"])
+    // DEBUG
+    const st = db.prepare('INSERT INTO Todos (title, description, date) VALUES (?, ?, ?)');
+    st.run(["Gör saker", "Ska göra det här: [insert lista]", "2020-03-03"]);
+    st.finalize();
 });
 
 module.exports = db;
