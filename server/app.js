@@ -1,7 +1,7 @@
 'use strict'
 
 const path = require('path');
-const express = require('express'); 
+const express = require('express');
 const db = require('./database');
 
 const port = 4000;
@@ -29,6 +29,7 @@ app.use(express.urlencoded({
 
 const login = require('./login')
 const register = require('./register')
+const todo = require('./todo')
 
 app.listen(port, () => {
     console.info(`Listening on port ${port}!`);
@@ -42,3 +43,4 @@ app.get('/users', (req, res) => {
 
 app.use('/login', login)
 app.use('/register', register)
+app.use('/todo', todo)
