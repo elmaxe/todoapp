@@ -9,6 +9,7 @@ import Register from './Register'
 import Login from './Login'
 import NavBar from './NavBar'
 import NotFound from './NotFound'
+import Todo from './Todo'
 
 import * as ROUTES from './routes'
 
@@ -20,7 +21,8 @@ const App = () => {
                 <div className="App fill-window">
                     <Switch>
                         <Route exact path={ROUTES.HOME}>
-                            <Redirect to={ROUTES.LOGIN}/>
+                            <Todo />
+                            {/* <Redirect to={ROUTES.LOGIN} /> */}
                         </Route>
                         <Route exact path={ROUTES.LOGIN}>
                             <Login />
