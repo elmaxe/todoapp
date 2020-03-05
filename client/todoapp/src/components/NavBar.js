@@ -25,7 +25,7 @@ class NavBar extends React.Component {
             {state.authenticated ? 
             <Auth actions={actions}/>
             :
-            <NoAuth />}
+            state.fetching ? null : <NoAuth />}
         </div>
         )
     }
@@ -73,13 +73,9 @@ class Auth extends React.Component {
         })
         .then(res => res.json())
         .then(json => {
-            if (json.error) {
-                return
-            } else {
-                document.cookie=`session=;expires=Fri, 1 Sep 1939 05:00:00 UTC`
-                this.props.actions.clearUser()
-                history.push('/login')
-            }
+            document.cookie=`session=;expires=Fri, 1 Sep 1939 05:00:00 UTC`
+            this.props.actions.clearUser()
+            history.push('/login')
         })
     }
 
