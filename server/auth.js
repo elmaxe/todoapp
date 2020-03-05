@@ -19,14 +19,15 @@ const isAuthenticated = (req, res, next) => {
     next();
 }
 
-const authenticate = (req, res, next) => {
+const authenticate = (req, id, username) => {
     req.session.user = {
-        id: 1,
-        username: "Hej"
+        id,
+        username
     }
-    next();
+    console.log(req.session)
 }
 
-
+exports.authenticate = authenticate;
+exports.isAuthenticated = isAuthenticated
 
 // module.exports = router;
