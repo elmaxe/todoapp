@@ -1,35 +1,24 @@
 import React from 'react'
 
-import {Link, Redirect} from 'react-router-dom'
 import './Login.css'
-import * as ROUTES from './routes'
-
+import {Link} from 'react-router-dom'
+import * as ROUTES from '../routes'
 import Alert from './Alert'
-import UserContext from './UserContext'
 
 const initState = {
     username: '',
     password: '',
+    password2: '',
     fetching: false,
-    error: ''
+    error: '',
+    success: ''
 }
 
-
-const Login = () => (
-    <UserContext.Consumer>
-        {value => value.authenticated ? 
-        <Redirect to={ROUTES.HOME} />
-        :
-        <LoginBase auth={value}/>
-    }
-    </UserContext.Consumer>
-)
-
-class LoginBase extends React.Component {
+class Register extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
 
-        this.state = initState;
+        this.state = initState
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -37,54 +26,53 @@ class LoginBase extends React.Component {
 
     handleChange(e) {
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]:e.target.value
         })
     }
 
     handleSubmit(e) {
         e.preventDefault();
-
         const {username, password} = this.state
-        const {auth} = this.props
-
+        
         const body = JSON.stringify({username, password})
 
-        this.setState({fetching: true})
+        this.setState({fetching: true, error:'', success:''})
 
-        fetch("/api/login", {
+        fetch('/api/register', {
             method: "POST",
-            credentials: "same-origin",  
             headers: {
                 "Content-Type": "application/json"
             },
             body
         })
-        .then(res => res.json())
+        .then(response => response.json())
         .then(json => {
             console.log(json)
             if (!json.error) {
-                this.setState({...initState})
-                // auth.login()
-                console.log(auth)
+                this.setState(() => ({...initState}), () => {
+                    this.setState({success: json.status})
+                })
             } else {
-                this.setState({fetching: false, error: json.error})
+                this.setState({fetching:false, error: json.error})
             }
         })
-        .catch(err => {
-            console.log(err)
+        .catch(error => {
+            console.log(error)
         })
     }
 
     render() {
-        const {username, password, fetching, error} = this.state;
-        const {auth} = this.props
-        const isInvalid = username === '' || password === ''
-        console.log(auth.authenticated)
+
+        const {username, password, password2, fetching, error, success} = this.state;
+
+        const isInvalid = username === '' || password === '' || password2 === '' || password !== password2;
+
         return (
             <div className="Login">
                 <form className="LoginForm">
-                <h1>Login</h1>
-                    {error && <Alert type="danger" text={error} />}
+                    <h1>Register</h1>
+                    {error && <Alert type="danger" text={error}/>}
+                    {success && <Alert type="success" text={success + " "} linkText="Login." linkPath={ROUTES.LOGIN} />}
                     <label>Username</label>
                     <input
                         className="inputBox"
@@ -103,17 +91,27 @@ class LoginBase extends React.Component {
                         placeholder="Password"
                         onChange={this.handleChange}
                     />
-                    <button className="LoginButton"
+                    <span><label>Confirm password</label></span>
+                    <input 
+                        className="inputBox"
+                        type="password"
+                        name="password2"
+                        value={password2}
+                        placeholder="Confirm password"
+                        onChange={this.handleChange}
+                    />
+                    <button
+                        className="LoginButton"
                         onClick={this.handleSubmit}
                         disabled={isInvalid || fetching}
                     >
-                        {fetching ? "Logging in..." : "Login"}
+                        {fetching ? "Registering..." : "Register"}
                     </button>
-                <div className="Links">Don't have an account? <Link to={ROUTES.REGISTER}>Register.</Link></div>
+                    <div className="Links">Already have an account? <Link to={ROUTES.LOGIN}>Login.</Link></div>
                 </form>
             </div>
         )
     }
 }
 
-export default Login
+export default Register;
