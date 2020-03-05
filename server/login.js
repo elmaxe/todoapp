@@ -6,6 +6,8 @@ const db = require('./database');
 
 const bcrypt = require('bcrypt')
 
+const auth = require('./auth')
+
 router.post('/', (req, res) => {
     const {username, password} = req.body;
 
@@ -26,7 +28,14 @@ router.post('/', (req, res) => {
     
             bcrypt.compare(password, row.password, (err, equal) => {
                 if (equal) {
-                    res.status(200).json({"status":"Login successful."})
+                    auth.authenticate(req, row.id, row.username)
+                    res.status(200).json({
+                        authenticated: true,
+                        user: {
+                            id: row.id,
+                            username: row.username
+                        }
+                    })
                     return
                 } else {
                     res.status(404).json({"error":"Wrong username or password."})
@@ -35,6 +44,18 @@ router.post('/', (req, res) => {
             })
         })
         getUsername.finalize();
+    })
+})
+
+router.get('/isAuth', (req, res) => {
+    const user = req.session.user
+
+    res.status(user ? 200 : 403).json({
+        authenticated: user ? true : false,
+        user: {
+            id: user ? user.id : "",
+            username: user ? user.username : ""
+        }
     })
 })
 
