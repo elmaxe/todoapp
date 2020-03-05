@@ -37,15 +37,17 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         maxAge: 1000*60*60*24,
-        httpOnly: true,
+        httpOnly: false,
         // secure: true,
         // domain: "127.0.0.1"
     }
 }))
 
 const login = require('./login')
+const logout = require('./logout')
 const register = require('./register')
 const todo = require('./todo')
+// const auth = require('./auth')
 
 app.listen(port, () => {
     console.info(`Listening on port ${port}!`);
@@ -65,5 +67,7 @@ app.get('/api/users', (req, res) => {
 })
 
 app.use('/api/login', login)
+app.use('/api/logout', logout)
 app.use('/api/register', register)
 app.use('/api/todo', todo)
+// app.use('/api/test', auth)

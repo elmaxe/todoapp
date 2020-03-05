@@ -4,30 +4,17 @@ var express = require('express')
 // var router = express.Router()
 const db = require('./database');
 
-const isAuthenticated = (req, res, next) => {
-
-    const user = req.session.user
-
-    res.status(200).json({
-        isAuthenticated: user ? true : false,
-        user: {
-            id: user ? user.id : "",
-            username: user ? user.username : ""
-        }
-    })
-
-    next();
-}
-
 const authenticate = (req, id, username) => {
-    req.session.user = {
-        id,
-        username
+    if (!req.session.user) {
+        console.log("CREATE NEW SESSION")
+        req.session.user = {
+            id,
+            username
+        }
+    } else {
+        console.log("ALREADY HAS A SESSION")
+        console.log(req.session)
     }
-    console.log(req.session)
 }
 
 exports.authenticate = authenticate;
-exports.isAuthenticated = isAuthenticated
-
-// module.exports = router;

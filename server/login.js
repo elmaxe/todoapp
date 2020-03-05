@@ -29,7 +29,13 @@ router.post('/', (req, res) => {
             bcrypt.compare(password, row.password, (err, equal) => {
                 if (equal) {
                     auth.authenticate(req, row.id, row.username)
-                    res.status(200).json({"status":"Login successful.", "token":"dwaluadhdha738y2hhr4"})
+                    res.status(200).json({
+                        authenticated: true,
+                        user: {
+                            id: row.id,
+                            username: row.username
+                        }
+                    })
                     return
                 } else {
                     res.status(404).json({"error":"Wrong username or password."})
@@ -38,6 +44,18 @@ router.post('/', (req, res) => {
             })
         })
         getUsername.finalize();
+    })
+})
+
+router.get('/isAuth', (req, res) => {
+    const user = req.session.user
+
+    res.status(user ? 200 : 403).json({
+        authenticated: user ? true : false,
+        user: {
+            id: user ? user.id : "",
+            username: user ? user.username : ""
+        }
     })
 })
 
