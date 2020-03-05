@@ -6,7 +6,7 @@ const db = require('./database');
 
 router.get('/get', (req, res) => {
     const {userID} = req.body;
-
+    console.log(req.session)
     const getTodos = db.prepare('SELECT * FROM Todos'); // WHERE userID = ?');
     db.serialize(() => {
         getTodos.all([userID], (err, rows) => {

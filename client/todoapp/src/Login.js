@@ -1,10 +1,11 @@
 import React from 'react'
 
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import './Login.css'
 import * as ROUTES from './routes'
 
 import Alert from './Alert'
+import UserContext from './UserContext'
 
 const initState = {
     username: '',
@@ -14,7 +15,17 @@ const initState = {
 }
 
 
-class Login extends React.Component {
+const Login = () => (
+    <UserContext.Consumer>
+        {value => value.authenticated ? 
+        <Redirect to={ROUTES.HOME} />
+        :
+        <LoginBase auth={value}/>
+    }
+    </UserContext.Consumer>
+)
+
+class LoginBase extends React.Component {
     constructor(props) {
         super(props);
 
@@ -34,13 +45,15 @@ class Login extends React.Component {
         e.preventDefault();
 
         const {username, password} = this.state
+        const {auth} = this.props
 
         const body = JSON.stringify({username, password})
 
         this.setState({fetching: true})
 
-        fetch("http://localhost:4000/login", {
-            method: "POST",    
+        fetch("/api/login", {
+            method: "POST",
+            credentials: "same-origin",  
             headers: {
                 "Content-Type": "application/json"
             },
@@ -51,6 +64,8 @@ class Login extends React.Component {
             console.log(json)
             if (!json.error) {
                 this.setState({...initState})
+                // auth.login()
+                console.log(auth)
             } else {
                 this.setState({fetching: false, error: json.error})
             }
@@ -62,9 +77,9 @@ class Login extends React.Component {
 
     render() {
         const {username, password, fetching, error} = this.state;
-
+        const {auth} = this.props
         const isInvalid = username === '' || password === ''
-
+        console.log(auth.authenticated)
         return (
             <div className="Login">
                 <form className="LoginForm">
