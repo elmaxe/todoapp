@@ -8,7 +8,6 @@ import fetchTodos, {addTodo} from '../actions/todoActions'
 
 const ProtectedRoute = ({component: Component, ...rest}) => {
     const state = rest.state
-    console.log(rest)
     return (
         <Route {...rest} render={(props) => (
             state.auth.authenticated ?

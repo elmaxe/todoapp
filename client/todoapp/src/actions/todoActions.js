@@ -30,7 +30,6 @@ export default function fetchTodos () {
                 if (json.error) {
                     dispatch(failTodoAction(json.error))
                 } else {
-                    console.log(json)
                     dispatch(receiveTodoAction(json.todos))
                 }
             }
