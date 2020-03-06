@@ -73,7 +73,6 @@ class Auth extends React.Component {
         })
         .then(res => res.json())
         .then(json => {
-            document.cookie=`session=;expires=Fri, 1 Sep 1939 05:00:00 UTC`
             this.props.actions.clearUser()
             history.push('/login')
         })
