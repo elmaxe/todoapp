@@ -28,7 +28,7 @@ const auth = (state = initState, action) => {
         case CLEAR_USER: return newState(state.fetching, state.hasFirstFetch, false, "", "")
         case START_AUTH_FETCH: return newState(true, state.hasFirstFetch, state.authenticated, state.user.id, state.user.username)
         case RECEIVE_AUTH_FETCH: return newState(false, true, state.authenticated, state.user.id, state.user.username)
-        case FAILED_AUTH_FETCH: return newState(state.fetching, state.hasFirstFetch, state.authenticated, state.user.id, state.user.username)
+        case FAILED_AUTH_FETCH: return newState(false, state.hasFirstFetch, state.authenticated, state.user.id, state.user.username)
         default: return state
     }
 }
