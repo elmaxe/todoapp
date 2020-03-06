@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
     if (user) {
 
         req.session.destroy()
+        res.cookie('session', '1', { expires: new Date(Date.now() - 31536000000*100), httpOnly: true })
         res.status(200).json({"status":"Logged out"})
     } else {
         res.status(403).json({"error":"Invalid cookie"})
