@@ -15,6 +15,7 @@ class Todo extends React.Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        props.actions.fetchTodos()
     }
 
     handleChange(e) {
@@ -25,7 +26,12 @@ class Todo extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this.state)
+        const {title, description, dueDate} = this.state
+
+        this.props.actions.addTodo(title, description, dueDate)
+
+        this.setState({...initState})
+        
     }
 
     render() {
@@ -78,4 +84,13 @@ class Todo extends React.Component {
     }
 }
 
+// const mapActionsToProps = (dispatch) => ({
+//     actions: bindActionCreators({fetchTodos}, dispatch)
+// })
+
 export default Todo;
+
+// export default connect(
+//     null,
+//     mapActionsToProps
+// )(Todo);

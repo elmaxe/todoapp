@@ -6,9 +6,9 @@ const db = new sqlite3.Database(databasePath);
 
 // Auto increment automatically increments the id entry, there is no need to supply it a value.
 const userTable = 'CREATE TABLE IF NOT EXISTS User (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)';
-const todoTable = 'CREATE TABLE IF NOT EXISTS Todos (id INTEGER PRIMARY KEY AUTOINCREMENT, userID TEXT, \
+const todoTable = 'CREATE TABLE IF NOT EXISTS Todos (id INTEGER PRIMARY KEY AUTOINCREMENT, userID INTEGER, \
                     title TEXT, description TEXT, date TEXT, FOREIGN KEY(userID) REFERENCES \
-                    User(id) ON DELETE CASCADE)';  // userID should be integer, TEXT for debug
+                    User(id) ON DELETE CASCADE)'; 
 
 db.serialize(() => {
     // db.run('DROP TABLE IF EXISTS User');
