@@ -59,7 +59,7 @@ class Login extends React.Component {
                 
                 this.setState({...initState})
 
-                actions.setUser(true, json.user.id, json.user.username)
+                actions.setUser(true, json.user.id, json.user.username, json.user.registrationDate)
 
                 history.push('/')
 

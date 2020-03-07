@@ -2,13 +2,14 @@ export const SET_USER = "SET_USER"
 export const CLEAR_USER = "CLEAR_USER"
 
 
-const setUser = (authenticated, id, username) => {
+const setUser = (authenticated, id, username, registrationDate) => {
     return {
         type: SET_USER,
         newUser: {
             authenticated,
             id,
-            username
+            username,
+            registrationDate
         }
     }
 }
@@ -40,7 +41,7 @@ export function fetchIsAuth() {
         )
         .then(json => {
             dispatch({type:RECEIVE_AUTH_FETCH})
-            dispatch(setUser(json.authenticated, json.user.id, json.user.username))
+            dispatch(setUser(json.authenticated, json.user.id, json.user.username, json.user.registrationDate))
         })
     }
 
