@@ -30,12 +30,13 @@ router.post('/', (req, res) => {
     
             bcrypt.compare(password, row.password, (err, equal) => {
                 if (equal) {
-                    auth.authenticate(req, row.id, row.username)
+                    auth.authenticate(req, row.id, row.username, row.regDate)
                     res.status(200).json({
                         authenticated: true,
                         user: {
                             id: row.id,
-                            username: row.username
+                            username: row.username,
+                            registrationDate: row.regDate
                         }
                     })
                     return
@@ -56,7 +57,8 @@ router.get('/isAuth', (req, res) => {
         authenticated: user ? true : false,
         user: {
             id: user ? user.id : "",
-            username: user ? user.username : ""
+            username: user ? user.username : "",
+            registrationDate: user ? user.registrationDate : ""
         }
     })
 })

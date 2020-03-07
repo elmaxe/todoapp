@@ -27,7 +27,7 @@ router.post('/', (req, res, next) => {
 
             if (row === undefined) {
 
-                const st = db.prepare('INSERT INTO User (username, password) VALUES (?, ?)');
+                const st = db.prepare('INSERT INTO User (username, password, regDate) VALUES (?, ?, ?)');
 
                 bcrypt.genSalt(saltRounds, (err, salt) => {
                     if (err) {
@@ -43,7 +43,7 @@ router.post('/', (req, res, next) => {
                             return;
                         }
                         //Insert hash and username
-                        st.run([username, hash]);
+                        st.run([username, hash, Date.now()]);
                         st.finalize();
                         res.status(200).json({"status":"Account registered."})
                     })
