@@ -6,7 +6,8 @@ const initState = {
     passwordOne: '',
     passwordTwo: '',
     error: '',
-    success: ''
+    success: '',
+    fetching: false
 }
 
 class ChangePassword extends React.Component {
@@ -25,12 +26,34 @@ class ChangePassword extends React.Component {
 
     handlePassSubmit(e) {
         e.preventDefault()
+        const {passwordOne} = this.state
+        this.setState({fetching:true})
 
-        this.setState({...initState})
+        const body = JSON.stringify({password: passwordOne})
+
+        fetch('/api/login/changepassword', {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body
+        })
+        .then(res => res.json())
+        .then(json => {
+            if (json.error) {
+                this.setState({error:json.error, fetching: false})
+            } else {
+                this.setState({...initState}, () => {
+                    this.setState({success:true})
+                })
+                console.log(json)
+            }
+        })
     }
 
     render() {
-        const {passwordOne, passwordTwo, error, success} = this.state
+        const {passwordOne, passwordTwo, error, success, fetching} = this.state
         const {state} = this.props
 
         const isInvalid = passwordOne === '' || passwordTwo === '' || passwordOne  !== passwordTwo
@@ -56,9 +79,9 @@ class ChangePassword extends React.Component {
                     />
                     <button
                         onClick={this.handlePassSubmit.bind(this)}
-                        disabled={isInvalid}
+                        disabled={isInvalid || fetching}
                         >
-                        Change password
+                        {fetching ?  "Changing password..." : "Change password"}
                     </button>
                 </form>
             </div>
