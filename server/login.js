@@ -8,6 +8,8 @@ const bcrypt = require('bcrypt')
 
 const auth = require('./auth')
 
+const {saltRounds} = require('./register')
+
 router.post('/', (req, res) => {
     const {username, password} = req.body;
 
@@ -57,6 +59,59 @@ router.get('/isAuth', (req, res) => {
             username: user ? user.username : ""
         }
     })
+})
+
+router.get('/changepassword', (req, res) => {
+    const {password} = req.body
+    const user = req.session.user
+
+    if (!user) {
+        res.status(403).json({"error":"Not logged in"})
+        return
+    }
+
+    const getUser = db.prepare('SELECT * FROM User WHERE id = ?', [user.id])
+    const changePassword = db.prepare('UPDATE User SET password = ? WHERE id = ?')
+
+    getUser.get((err, row) => {
+        if (err) {
+            res.status(500).json({"error":"Database error"})
+            return
+        }
+
+        if (row === undefined) {
+            res.status(404).json({"error":"Couldn't find user"})
+            return
+        }
+
+        bcrypt.compare(password, row.password, (err, equal) => {
+            if (err) {
+                res.status(500).json({"error":"Hash error"})
+                return
+            }
+
+            if (equal) {
+                res.status(403).json({"error":"New password can't be the same as the old one."})
+                return
+            } else {
+                bcrypt.genSalt(saltRounds, (err, salt) => {
+                    if (err) {
+                        res.status(500).json({"error":"Hash error"})
+                        return
+                    }
+                    bcrypt.hash(password, salt, (err, hash) => {
+                        if (err) {
+                            res.status(500).json({"error":"Hash error"})
+                            return
+                        }
+                        changePassword.run([hash, row.id])
+                    })
+                })
+            }
+        })
+
+    })
+
 })
 
 module.exports = router

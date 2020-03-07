@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt')
 
 const saltRounds = 12;
 
+
 router.post('/', (req, res, next) => {
     const {username, password} = req.body
 
@@ -57,3 +58,4 @@ router.post('/', (req, res, next) => {
 })
 
 module.exports = router
+module.exports.saltRounds = saltRounds
