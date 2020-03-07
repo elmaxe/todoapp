@@ -14,6 +14,7 @@ import NavBar from './NavBar'
 import NotFound from './NotFound'
 import Todo from './Todo'
 import ProtectedRoute from './ProtectedRoute'
+import Account from './Account'
 
 import * as ROUTES from '../routes'
 import history from '../history'
@@ -44,6 +45,9 @@ class App extends React.Component {
                                     </Route>
                                     <Route exact path={ROUTES.REGISTER}>
                                         <Register />
+                                    </Route>
+                                    <Route exact path={ROUTES.ACCOUNT}>
+                                        <ProtectedRoute component={Account} />
                                     </Route>
                                     <Route component={NotFound} />
                                 </Switch>
