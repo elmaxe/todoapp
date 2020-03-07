@@ -15,7 +15,8 @@ const Account = ({state, actions}) =>  {
     return (
         <div className="Account">
             <div>
-                <h1>{state.auth.user.username}</h1>
+                <h1>User settings</h1>
+                <h2>{state.auth.user.username}</h2>
                 Member since {date}
             </div>
             <ChangePassword />
