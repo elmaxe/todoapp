@@ -23,7 +23,7 @@ class NavBar extends React.Component {
         return (
         <div>
             {state.authenticated ? 
-            <Auth actions={actions}/>
+            <Auth actions={actions} state={state}/>
             :
             state.fetching ? null : <NoAuth />}
         </div>
@@ -79,6 +79,7 @@ class Auth extends React.Component {
     }
 
     render() {
+        const {state} = this.props
         return (
             <div>
                 <ul>
@@ -91,7 +92,7 @@ class Auth extends React.Component {
                         <Link to={ROUTES.HOME}>Home</Link>
                     </li>
                     <li>
-                        <Link to={ROUTES.ACCOUNT}>Account</Link>
+                        <Link to={ROUTES.ACCOUNT}>{state.user.username}</Link>
                     </li>
                     <li>
                         <Link to="#" onClick={this.logout}>Log out</Link>
