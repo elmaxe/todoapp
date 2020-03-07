@@ -117,4 +117,27 @@ router.post('/changepassword', (req, res) => {
 
 })
 
+router.get('/removeaccount', (req, res) => {
+    const user = req.session.user
+
+    if (!user) {
+        res.status(403).json({"error":"Not logged in"})
+        return
+    }
+
+    db.run('DELETE FROM User WHERE id = ?', [user.id], function(err) {
+        if (err) {
+            res.status(500).json({"error":"Database error"})
+            console.log(err)
+            return
+        }
+
+        if (this.changes > 0) {
+            res.status(200).json({"status":"Account removed along with user data"})
+        } else {
+            res.status(404).json({"error":"No user found, no user removed"})
+        }
+    })
+})
+
 module.exports = router
