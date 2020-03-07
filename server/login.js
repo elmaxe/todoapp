@@ -61,7 +61,7 @@ router.get('/isAuth', (req, res) => {
     })
 })
 
-router.get('/changepassword', (req, res) => {
+router.post('/changepassword', (req, res) => {
     const {password} = req.body
     const user = req.session.user
 
@@ -105,12 +105,15 @@ router.get('/changepassword', (req, res) => {
                             return
                         }
                         changePassword.run([hash, row.id])
+                        changePassword.finalize()
+                        res.status(200).json({"status":"Password changed"})
                     })
                 })
             }
         })
 
     })
+    getUser.finalize()
 
 })
 
