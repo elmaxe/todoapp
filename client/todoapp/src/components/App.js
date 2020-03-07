@@ -14,7 +14,7 @@ import NavBar from './NavBar'
 import NotFound from './NotFound'
 import Todo from './Todo'
 import ProtectedRoute from './ProtectedRoute'
-import Account from './Account'
+import Account from './Account/Account'
 
 import * as ROUTES from '../routes'
 import history from '../history'

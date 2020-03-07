@@ -1,0 +1,91 @@
+.Account {
+    width: 50vh;
+    border: 2px solid rgb(207, 212, 218);
+    border-radius: 15px;
+    background-color: white;
+    padding: 5%;
+    padding-top: 1%;
+    align-content: center;
+    /* margin: auto; */
+}
+
+.ChangePassword {
+    padding-top: 5%;
+}
+
+.RemoveAccount {
+    padding-top: 5%;
+}
+
+.inputBox {
+    margin: 2%;
+    width: 90%;
+    font-size: large;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid rgb(207, 212, 218);
+    
+}
+
+.inputBox:focus {
+    box-shadow: 0 0 5px rgb(30, 79, 167);
+}
+
+label {
+    margin: 10px;
+}
+
+.ChangePassButton {
+    width: 95%;
+    margin: 2%;
+    font-size: medium;
+    font-weight: bold;
+    background-color: rgb(40, 89, 177);
+    
+    border:1px solid rgb(30, 79, 167);
+    border-radius: 5px;
+    padding: 12px;
+    color: white;
+}
+
+.ChangePassButton:disabled:hover {
+    background-color: cornflowerblue;
+    border:1px solid cornflowerblue;
+}
+.ChangePassButton:disabled {
+    background-color: cornflowerblue;
+    border:1px solid cornflowerblue;
+}
+.ChangePassButton:hover {
+    background-color: rgb(30, 79, 167);
+    cursor: pointer;
+    border:1px solid rgb(10, 59, 147);
+}
+
+.RemoveAccBtn {
+    width: 95%;
+    margin: 2%;
+    font-size: medium;
+    font-weight: bold;
+    background-color: firebrick;
+    
+    border:1px solid rgb(168, 24, 24);
+    border-radius: 5px;
+    padding: 12px;
+    color: white;
+}
+
+.RemoveAccBtn:hover {
+    background-color: rgb(158, 14, 14);
+    cursor: pointer;
+    border:1px solid rgb(138, 4, 4);
+}
+
+.RemoveAccBtn:disabled:hover {
+    background-color: rgb(208, 114, 114);
+    border:1px solid rgb(208, 114, 114);
+}
+.RemoveAccBtn:disabled {
+    background-color: rgb(208, 114, 114);
+    border:1px solid rgb(208, 114, 114);
+}
