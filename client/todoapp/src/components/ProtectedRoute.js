@@ -5,6 +5,7 @@ import * as ROUTES from '../routes'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import fetchTodos, {addTodo} from '../actions/todoActions'
+import setUser, {clearUser} from '../actions/userActions'
 
 const ProtectedRoute = ({component: Component, ...rest}) => {
     const state = rest.state
@@ -20,7 +21,7 @@ const ProtectedRoute = ({component: Component, ...rest}) => {
 }
 
 const mapActionsToProps = (dispatch) => ({
-    actions: bindActionCreators({fetchTodos, addTodo}, dispatch)
+    actions: bindActionCreators({fetchTodos, addTodo, setUser, clearUser}, dispatch)
 })
 
 export default connect(

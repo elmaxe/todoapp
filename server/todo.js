@@ -4,6 +4,14 @@ var express = require('express')
 var router = express.Router()
 const db = require('./database');
 
+router.use((req, res, next) => {
+    if (req.session.user) {
+        next()
+    } else {
+        res.status(403).json({"error":"Not logged in"})
+    }
+})
+
 router.get('/get', (req, res) => {
     const user = req.session.user;
     const getTodos = db.prepare('SELECT * FROM Todos WHERE userID = ?');

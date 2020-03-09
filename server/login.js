@@ -8,6 +8,8 @@ const bcrypt = require('bcrypt')
 
 const auth = require('./auth')
 
+const {saltRounds} = require('./register')
+
 router.post('/', (req, res) => {
     const {username, password} = req.body;
 
@@ -28,12 +30,13 @@ router.post('/', (req, res) => {
     
             bcrypt.compare(password, row.password, (err, equal) => {
                 if (equal) {
-                    auth.authenticate(req, row.id, row.username)
+                    auth.authenticate(req, row.id, row.username, row.regDate)
                     res.status(200).json({
                         authenticated: true,
                         user: {
                             id: row.id,
-                            username: row.username
+                            username: row.username,
+                            registrationDate: row.regDate
                         }
                     })
                     return
@@ -54,7 +57,87 @@ router.get('/isAuth', (req, res) => {
         authenticated: user ? true : false,
         user: {
             id: user ? user.id : "",
-            username: user ? user.username : ""
+            username: user ? user.username : "",
+            registrationDate: user ? user.registrationDate : ""
+        }
+    })
+})
+
+router.post('/changepassword', (req, res) => {
+    const {password} = req.body
+    const user = req.session.user
+
+    if (!user) {
+        res.status(403).json({"error":"Not logged in"})
+        return
+    }
+
+    const getUser = db.prepare('SELECT * FROM User WHERE id = ?', [user.id])
+    const changePassword = db.prepare('UPDATE User SET password = ? WHERE id = ?')
+
+    getUser.get((err, row) => {
+        if (err) {
+            res.status(500).json({"error":"Database error"})
+            return
+        }
+
+        if (row === undefined) {
+            res.status(404).json({"error":"Couldn't find user"})
+            return
+        }
+
+        bcrypt.compare(password, row.password, (err, equal) => {
+            if (err) {
+                res.status(500).json({"error":"Hash error"})
+                return
+            }
+
+            if (equal) {
+                res.status(403).json({"error":"New password can't be the same as the old one."})
+                return
+            } else {
+                bcrypt.genSalt(saltRounds, (err, salt) => {
+                    if (err) {
+                        res.status(500).json({"error":"Hash error"})
+                        return
+                    }
+                    bcrypt.hash(password, salt, (err, hash) => {
+                        if (err) {
+                            res.status(500).json({"error":"Hash error"})
+                            return
+                        }
+                        changePassword.run([hash, row.id])
+                        changePassword.finalize()
+                        res.status(200).json({"status":"Password changed"})
+                    })
+                })
+            }
+        })
+
+    })
+    getUser.finalize()
+
+})
+
+router.get('/removeaccount', (req, res) => {
+    const user = req.session.user
+
+    if (!user) {
+        res.status(403).json({"error":"Not logged in"})
+        return
+    }
+
+    db.run('DELETE FROM User WHERE id = ?', [user.id], function(err) {
+        if (err) {
+            res.status(500).json({"error":"Database error"})
+            console.log(err)
+            return
+        }
+
+        if (this.changes > 0) {
+            res.status(200).json({"status":"Account removed along with user data"})
+        } else {
+            res.status(404).json({"error":"No user found, no user removed"})
         }
     })
 })
