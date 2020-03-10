@@ -1,5 +1,9 @@
 'use strict'
 
+const fs = require('fs')
+const http = require('http')
+const https = require('https')
+
 const path = require('path');
 const express = require('express');
 const db = require('./database');
@@ -86,3 +90,12 @@ app.use(express.static(path.join(__dirname, '../client/todoapp/build')))
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/todoapp/build', 'index.html'))
 })
+
+const httpServer = http.createServer(app)
+const httpsServer = https.createServer({
+    key: fs.readFileSync('./key.pem'),
+    cert: fs.readFileSync('./cert.pem'),
+    passphrase: "12345"
+}, app)
+httpServer.listen(8080)
+httpsServer.listen(8443)
