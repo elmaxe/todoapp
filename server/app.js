@@ -56,12 +56,6 @@ app.listen(port, () => {
     console.info(`Listening on port ${port}!`);
 });
 
-// app.use(express.static(path.join(__dirname, '../client/todoapp/build')))
-
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../client/todoapp/build', 'index.html'))
-// })
-
 app.get('/api/users', (req, res) => {
     console.log(req.session)
     db.all('SELECT * FROM User', (err, rows) => {
@@ -74,3 +68,9 @@ app.use('/api/logout', logout)
 app.use('/api/register', register)
 app.use('/api/todo', todo)
 // app.use('/api/test', auth)
+
+app.use(express.static(path.join(__dirname, '../client/todoapp/build')))
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/todoapp/build', 'index.html'))
+})
