@@ -8,12 +8,30 @@ const bcrypt = require('bcrypt')
 const saltRounds = 12;
 
 
-router.post('/', (req, res, next) => {
+const validateUserData = (req, res, next) => {
+    const {username, password} = req.body
+    if (!username || ! password) {
+        res.status(400).json({"error":"Missing credentials"})
+        return
+    }
+
+    if (username.length < 4) {
+        res.status(400).json({"error":"Username should be at least 4 characters long."})
+    }
+    
+    if (password.length < 5) {
+        res.status(400).json({"error":"Password should be at least 5 characters long."})
+        return
+    }
+
+    next()
+}
+
+router.post('/', validateUserData, (req, res, next) => {
     const {username, password} = req.body
 
     //TODO
     //Register email instead?
-    //or lowercase all usernames in database
 
     const getUsername = db.prepare('SELECT * FROM User WHERE username = ?');
 
