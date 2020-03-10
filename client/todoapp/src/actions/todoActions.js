@@ -31,6 +31,9 @@ export default function fetchTodos () {
             json => {
                 if (json.error) {
                     dispatch(failTodoAction(json.error))
+                    //We got an error from server.
+                    //Has our session expired? This will log us out in that case
+                    dispatch(fetchIsAuth())
                 } else {
                     dispatch(receiveTodoAction(json.todos))
                 }
