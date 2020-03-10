@@ -46,7 +46,7 @@ router.post('/add', (req, res) => {
                 return;
             }
 
-            res.status(200).json({todos: rows});
+            res.status(201).json({todos: rows});
         });
         load.finalize();
     })
