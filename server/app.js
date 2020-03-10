@@ -15,6 +15,9 @@ var morgan = require('morgan')
 const session = require('express-session')
 const uuid4 = require('uuid4');
 var router = express.Router();
+const helmet = require('helmet')
+
+app.use(helmet())
 
 app.use(cors())
 app.use(bodyParser.urlencoded({
