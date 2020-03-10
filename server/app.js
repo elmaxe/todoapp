@@ -13,9 +13,12 @@ const bodyParser = require('body-parser')
 //logging
 var morgan = require('morgan')
 const session = require('express-session')
+const redis = require('redis')
 const uuid4 = require('uuid4');
-var router = express.Router();
 const helmet = require('helmet')
+
+let RedisStore = require('connect-redis')(session)
+let redisClient = redis.createClient()
 
 app.use(helmet())
 
@@ -32,14 +35,23 @@ app.use(express.urlencoded({
     extended: true,
 }));
 
+const cookieMaxAge = 60*60*24
+
 app.use(session({
     name: "session",
+    //Non-memory-leaking store
+    store: new RedisStore({
+        client: redisClient,
+        ttl: cookieMaxAge,
+        //Disabled resettig the max age in store upon checking the session
+        disableTouch: true
+    }),
     genid: () => {return uuid4()},
     secret: "1234",
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 1000*60*60*24,
+        maxAge: 1000*cookieMaxAge,
         httpOnly: true,
         // secure: true,
         // domain: "127.0.0.1"
