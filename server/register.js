@@ -17,6 +17,7 @@ const validateUserData = (req, res, next) => {
 
     if (username.length < 4) {
         res.status(400).json({"error":"Username should be at least 4 characters long."})
+        return
     }
     
     if (password.length < 5) {
