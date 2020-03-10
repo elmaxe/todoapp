@@ -16,7 +16,6 @@ const session = require('express-session')
 const redis = require('redis')
 const uuid4 = require('uuid4');
 const helmet = require('helmet')
-const ngrok = require('ngrok');
 
 let RedisStore = require('connect-redis')(session)
 let redisClient = redis.createClient()
@@ -87,17 +86,3 @@ app.use(express.static(path.join(__dirname, '../client/todoapp/build')))
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/todoapp/build', 'index.html'))
 })
-
-ngrok.connect({
-    proto : 'http',
-    addr : 4000,
-    auth : "user:password"
-}, (err, url) => {
-    if (err) {
-        console.error('Error while connecting Ngrok',err);
-        return new Error('Ngrok Failed');
-    } else {
-        console.log('Tunnel Created -> ', url);
-        console.log('Tunnel Inspector ->  http://127.0.0.1:4040');
-    }
-});
