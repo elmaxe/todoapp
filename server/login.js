@@ -10,7 +10,27 @@ const auth = require('./auth')
 
 const {saltRounds} = require('./register')
 
-router.post('/', (req, res) => {
+const hasUsername = (req, res, next) => {
+    const {username} = req.body
+
+    if (!username) {
+        res.status(400).json({"error":"No username provided."})
+        return
+    }
+    next()
+}
+
+const hasPassword = (req, res, next) => {
+    const {password} = req.body
+
+    if (!password) {
+        res.status(400).json({"error":"No password provided."})
+        return
+    }
+    next()
+}
+
+router.post('/', hasUsername, hasPassword, (req, res) => {
     const {username, password} = req.body;
 
     const getUsername = db.prepare('SELECT * FROM User WHERE username = ?');
@@ -63,12 +83,12 @@ router.get('/isAuth', (req, res) => {
     })
 })
 
-router.post('/changepassword', (req, res) => {
+router.post('/changepassword', hasPassword, (req, res) => {
     const {password} = req.body
     const user = req.session.user
 
     if (!user) {
-        res.status(403).json({"error":"Not logged in"})
+        res.status(403).json({"error":"Session expired"})
         return
     }
 
@@ -123,7 +143,7 @@ router.get('/removeaccount', (req, res) => {
     const user = req.session.user
 
     if (!user) {
-        res.status(403).json({"error":"Not logged in"})
+        res.status(403).json({"error":"Session expired"})
         return
     }
 

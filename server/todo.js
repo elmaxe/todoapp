@@ -8,7 +8,7 @@ router.use((req, res, next) => {
     if (req.session.user) {
         next()
     } else {
-        res.status(403).json({"error":"Not logged in"})
+        res.status(403).json({"error":"Session expired."})
     }
 })
 
@@ -46,7 +46,7 @@ router.post('/add', (req, res) => {
                 return;
             }
 
-            res.status(200).json({todos: rows});
+            res.status(201).json({todos: rows});
         });
         load.finalize();
     })
