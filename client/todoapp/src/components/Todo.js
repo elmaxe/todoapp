@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './Todo.css';
+import CardModal from './CardModal'
 
 const initState = {
     title: '',
@@ -36,10 +37,13 @@ class Todo extends React.Component {
 
     render() {
         const {title, description, dueDate} = this.state;
+        // console.log(this.props)
 
         const isInvalid = title === '' || description === '' || dueDate === '';
 
         return (
+            <div className="Page">
+                <CardModal />
             <div className="Todos">
                 <div className="TodoInput">
                     <input
@@ -75,13 +79,52 @@ class Todo extends React.Component {
                         </button>
                     </div>
                 </div>
-                <div className="TodoCards">
-                    {true ? "Loading..." : "List of todos"}
-                </div>
             </div>
+            <div className="TodoCards">
+                {this.props.state.todo.fetching ? "Loading..." : this.props.state.todo.todos.map(todo => <TodoItem todo={todo}/>)}
+            </div>
+        </div>
                 
         )
     }
+}
+
+const TodoItem = (data) => {
+    const {todo} = data
+    console.log(todo)
+    return (
+        <div>
+                <div className="TodoCard">
+                    <input
+                        disabled
+                        id="title"
+                        type="text"
+                        name="title"
+                        placeholder="Title"
+                        value={todo.title}
+                        // onChange={this.handleChange}
+                    />
+                    <textarea
+                        disabled
+                        id="description"
+                        type="text"
+                        name="description"
+                        placeholder="Description"
+                        value={todo.description}
+                        // onChange={this.handleChange}
+                    />
+                    <div className="DateAndAddRow">
+                        {todo.date}
+                    </div>
+                    <button>
+                        Edit
+                    </button>
+                    <button>
+                        Mark as done
+                    </button>
+                </div>
+        </div>
+    )
 }
 
 // const mapActionsToProps = (dispatch) => ({
