@@ -49,6 +49,7 @@ router.post('/', hasUsername, hasPassword, (req, res) => {
             }
     
             bcrypt.compare(password, row.password, (err, equal) => {
+                console.log(row)
                 if (equal) {
                     auth.authenticate(req, row.id, row.username, row.regDate)
                     res.status(200).json({
@@ -155,6 +156,9 @@ router.get('/removeaccount', (req, res) => {
         }
 
         if (this.changes > 0) {
+            req.session.destroy()
+            //TODO REMOVE FROM REDIS
+            res.cookie('session', '', { expires: new Date(Date.now() - 31536000000*100), httpOnly: true })
             res.status(200).json({"status":"Account removed along with user data"})
         } else {
             res.status(404).json({"error":"No user found, no user removed"})
