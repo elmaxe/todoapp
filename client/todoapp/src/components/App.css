@@ -6,7 +6,7 @@
   
 .fill-window {
   height: 95%;
-  position: absolute;
+  /* position: absolute; */
   left: 0;
   width: 100%;
   overflow: auto;
