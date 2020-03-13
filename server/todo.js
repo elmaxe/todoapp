@@ -75,4 +75,27 @@ router.post('/remove', (req, res) => {
     })
 })
 
+router.post('/update', (req, res) => {
+    const {id, title, description, dueDate} = req.body;
+    const user = req.session.user;
+
+    const updateTodo = db.prepare('UPDATE Todos SET title = ?, description = ?, date = ? WHERE userID = ? AND id = ?');
+    const load = db.prepare('SELECT * FROM Todos WHERE userID = ?');
+    db.serialize(() => {
+        updateTodo.run([title, description, dueDate, user.id, id]);
+        updateTodo.finalize();
+
+        load.all([user.id], (err, rows) => {
+            if (err) {
+                res.status(500).json({"error":"Database error"});
+                console.log(err);
+                return;
+            }
+
+            res.status(200).json({todos: rows});
+        });
+        load.finalize();
+    })
+})
+
 module.exports = router
