@@ -5,10 +5,10 @@
 }
   
 .fill-window {
-  height: 90%;
-  position: absolute;
+  height: 95%;
+  /* position: absolute; */
   left: 0;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   background-color: rgb(249, 249, 249);
 }

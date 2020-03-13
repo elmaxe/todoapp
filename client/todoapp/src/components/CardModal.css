@@ -1,0 +1,121 @@
+.CardModal {
+    /* display: none; Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    text-align: left;
+}
+
+/* Modal Content */
+.CardModalContent {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    border-radius: 10px;
+}
+
+.CardModal #title {
+    border-radius: 5px;
+    padding: 10px;
+    border: 0px solid rgb(207, 212, 218);
+    width: 97%;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.CardModal #description {
+    border-radius: 5px;
+    padding: 10px;
+    border: 0px solid rgb(207, 212, 218);
+    width: 97%;
+    height: 10vh;
+    resize: none;
+    font-size: 15px;
+    margin: 5px;
+}
+
+.CardModalContent > :focus {
+    outline-width: 0;
+}
+
+.CardModalContent #saveButton {
+    /* width: 95%; */
+    margin: 1%;
+    font-size: medium;
+    font-weight: bold;
+    background-color: rgb(40, 89, 177);
+    
+    border:1px solid rgb(30, 79, 167);
+    border-radius: 5px;
+    padding: 12px;
+    color: white;
+}
+
+.CardModalContent #saveButton:disabled:hover {
+    background-color: cornflowerblue;
+    border:1px solid cornflowerblue;
+}
+.CardModalContent #saveButton:disabled {
+    background-color: cornflowerblue;
+    border:1px solid cornflowerblue;
+}
+.CardModalContent #saveButton:hover {
+    background-color: rgb(30, 79, 167);
+    cursor: pointer;
+    border:1px solid rgb(10, 59, 147);
+}
+
+.CardModalContent #cancelButton {
+    margin: 1%;
+    font-size: medium;
+    font-weight: bold;
+    background-color: white;
+    
+    border:1px solid rgb(200, 200, 200);
+    border-radius: 5px;
+    padding: 12px;
+    color: rgb(100, 100, 100);
+}
+
+.CardModalContent #cancelButton:hover {
+    background-color: rgb(230, 230, 230);
+    cursor: pointer;
+    border:1px solid rgb(150, 150, 150);
+}
+
+.CardModalContent #deleteButton {
+    /* width: 95%; */
+    margin: 1%;
+    font-size: medium;
+    font-weight: bold;
+    background-color: firebrick;
+    
+    border:1px solid rgb(168, 24, 24);
+    border-radius: 5px;
+    padding: 12px;
+    color: white;
+}
+
+.CardModalContent #deleteButton:hover {
+    background-color: rgb(158, 14, 14);
+    cursor: pointer;
+    border:1px solid rgb(138, 4, 4);
+}
+.CardModalContent #deleteButton:disabled:hover {
+    background-color: rgb(208, 114, 114);
+    border:1px solid rgb(208, 114, 114);
+}
+.CardModalContent #deleteButton:disabled {
+    background-color: rgb(208, 114, 114);
+    border:1px solid rgb(208, 114, 114);
+}
