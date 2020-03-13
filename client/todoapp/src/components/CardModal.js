@@ -8,7 +8,9 @@ class CardModal extends React.Component {
         this.state = {
             title: props.todo.title,
             description: props.todo.description,
-            date: props.todo.date,    
+            date: props.todo.date,
+            deleting: false,
+            saving: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.save = this.save.bind(this)
@@ -30,6 +32,8 @@ class CardModal extends React.Component {
             description: this.state.description,
             dueDate: this.state.date
         })
+
+        this.setState({saving: true})
         
         fetch('/api/todo/update', {
             method: "POST",
@@ -49,8 +53,14 @@ class CardModal extends React.Component {
             json => {
                 this.props.actions.updateTodos(json.todos)
                 this.props.cancel()
+                this.setState({saving:false})
             }
         )
+    }
+
+    delete() {
+        this.setState({deleting: true})
+        this.props.actions.removeTodo(this.props.todo.id)
     }
 
     render() {
@@ -58,6 +68,7 @@ class CardModal extends React.Component {
 
 
 
+        console.log(this.props.removing)
         return (
             <div>
                 {this.props.enabled ?
@@ -88,14 +99,25 @@ class CardModal extends React.Component {
                                     onChange={this.handleChange}
                                 />
                             </div>
-                            <button onClick={this.props.cancel} id="cancelButton">
+                            <button
+                                onClick={this.props.cancel}
+                                id="cancelButton"
+                                >
                                 Cancel
                             </button>
-                            <button onClick={console.log} id="deleteButton">
-                                Delete
+                            <button 
+                                onClick={this.delete.bind(this)}
+                                id="deleteButton"
+                                disabled={this.state.deleting || this.state.saving}
+                                >
+                                {this.state.deleting ? "Deleting..." : "Delete"}
                             </button>
-                            <button onClick={this.save} id="saveButton">
-                                Save
+                            <button
+                                onClick={this.save}
+                                id="saveButton"
+                                disabled={this.state.deleting || this.state.saving}
+                                >
+                                {this.state.saving ? "Saving..." : "Save"}
                             </button>
                         </div>
                     </div>

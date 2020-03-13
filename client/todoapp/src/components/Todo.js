@@ -112,10 +112,6 @@ class TodoItem extends React.Component {
         })
     }
 
-    reset() {
-
-    }
-
     handleClick(e) {
         const {enabled} = this.state
 
