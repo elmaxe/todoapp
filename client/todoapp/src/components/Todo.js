@@ -42,7 +42,7 @@ class Todo extends React.Component {
         const isInvalid = title === '' || description === '' || dueDate === '';
 
         return (
-            <div>
+            <div className="Page">
             <div className="Todos">
                 <div className="TodoInput">
                     <input

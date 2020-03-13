@@ -1,16 +1,18 @@
 
 .Todos {
-    /* width: 30%; */
+    width: 30%;
+    display: inline-block;
     /* padding-top: 30%; */
     /* margin-top: 60%; */
-    margin-top: 0%;
+    /* margin-top: 0%; */
     /* margin: 1%; */
     position: relative;
     z-index: 1;
 }
 
 .Page {
-    /* width: 100%; */
+    width: 100%;
+    text-align: center;
 }
 
 .TodoInput {
@@ -25,7 +27,7 @@
     border-radius: 5px;
     padding: 10px;
     border: 0px solid rgb(207, 212, 218);
-    width: 97%;
+    width: 90%;
     font-size: 20px;
     font-weight: bold;
     margin: 5px;
@@ -35,7 +37,7 @@
     border-radius: 5px;
     padding: 10px;
     border: 0px solid rgb(207, 212, 218);
-    width: 97%;
+    width: 90%;
     height: 10vh;
     resize: none;
     font-size: 15px;
@@ -77,47 +79,61 @@
     border-radius: 5px;
     border: none;
     font-size: 15px;
+    /* float: left; */
 }
 
 .DateAndAddRow {
     height: 50px;
-    margin: 10px;
-}
-
-.TodoCards {
-    /* width: 20%; */
-    /* margin-top: 50%; */
-    background-color: white;
+    /* margin: 10px; */
+    margin-left: 15px;
     
 }
 
+.TodoCards {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    /* padding: 20px; */
+    margin-left: 5%;
+    /* overflow: auto; */
+
+    /* margin-left: 5%; */
+    /* width: 25%; */
+    /* margin-top: 50%; */
+    /* background-color: white; */
+}
+
+
 .TodoCard {
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid rgb(207, 212, 218);
+    /* padding: 1%; */
+    margin: 5%;
+    border: 5px solid rgb(207, 212, 218);
     border-radius: 10px;
     background-color: white;
+    text-align: left;
+    width: 90%;
+    display: inline-block;
 }
 
 .TodoCard #title {
     border-radius: 5px;
     padding: 10px;
     border: 0px solid rgb(207, 212, 218);
-    width: 97%;
+    width: 90%;
     font-size: 20px;
     font-weight: bold;
-    margin: 5px;
+    margin: 10px;
 }
 
 .TodoCard #description {
     border-radius: 5px;
     padding: 10px;
     border: 0px solid rgb(207, 212, 218);
-    width: 97%;
+    width: 90%;
     height: 10vh;
     resize: none;
     font-size: 15px;
-    margin: 5px;
+    margin: 10px;
 }
 
 .TodoCard > :focus {
@@ -146,7 +162,10 @@
     cursor: pointer;
     background-color: white;
     border-radius: 5px;
-    width: 30px;
+    width: 40px;
+    margin-left: 15px;
+    vertical-align: middle;
+    margin-bottom: 5px;
 }
 
 .editButton:hover {
