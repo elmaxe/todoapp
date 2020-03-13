@@ -3,6 +3,7 @@ import { fetchIsAuth } from "./userActions"
 export const FETCH_TODOS = "FETCH_TODOS"
 export const RECEIVE_TODOS = "RECEIVE_TODOS"
 export const FAIL_FETCH_TODOS = "FAIL_FETCH_TODOS"
+export const UPDATE_TODOS = "UPDATE_TODOS"
 
 
 const fetchTodoAction = () => {
@@ -71,3 +72,39 @@ export function addTodo (title, description, dueDate) {
     }
 }
 
+export function updateTodos(newTodos)  {
+    return dispatch => {
+        dispatch({type: UPDATE_TODOS, todos: newTodos})
+    }
+}
+
+export function removeTodo(id) {
+    return dispatch => {
+        dispatch(fetchTodoAction())
+
+        const body = JSON.stringify({id})
+
+        fetch('/api/todo/remove', {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body
+        })
+        .then(
+            response => response.json()
+        )
+        .then(json => {
+            if (json.error) {
+                console.log(json.error)
+                dispatch(failTodoAction(json.error))
+                dispatch(fetchIsAuth())
+            } else {
+                dispatch(receiveTodoAction(json.todos))
+                //dispatch
+                // this.props.actions.updateTodos(json.todos)
+            }
+        })
+    }
+}

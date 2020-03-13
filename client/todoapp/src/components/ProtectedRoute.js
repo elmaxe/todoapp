@@ -4,7 +4,7 @@ import {Route, Redirect} from 'react-router-dom'
 import * as ROUTES from '../routes'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import fetchTodos, {addTodo} from '../actions/todoActions'
+import fetchTodos, {addTodo, updateTodos, removeTodo} from '../actions/todoActions'
 import setUser, {clearUser} from '../actions/userActions'
 
 const ProtectedRoute = ({component: Component, ...rest}) => {
@@ -21,7 +21,7 @@ const ProtectedRoute = ({component: Component, ...rest}) => {
 }
 
 const mapActionsToProps = (dispatch) => ({
-    actions: bindActionCreators({fetchTodos, addTodo, setUser, clearUser}, dispatch)
+    actions: bindActionCreators({fetchTodos, addTodo, setUser, clearUser, updateTodos, removeTodo}, dispatch)
 })
 
 export default connect(

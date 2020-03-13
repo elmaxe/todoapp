@@ -124,3 +124,51 @@
     background-color: white;
     color: black;
 }
+
+.red {
+    border: 5px solid #ff4d4d;
+}
+
+.orange {
+    border: 5px solid #ff944d;
+}
+
+.yellow {
+    border: 5px solid yellow;
+}
+
+.editButton {
+    opacity: 50%;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 5px;
+    width: 30px;
+}
+
+.editButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+
+.doneButton {
+    margin: 1%;
+    font-size: medium;
+    font-weight: bold;
+    background-color: rgb(38, 169, 72);
+    
+    border:1px solid rgb(28, 159, 62);
+    border-radius: 5px;
+    padding: 12px;
+    color: white;
+}
+
+.doneButton:hover {
+    cursor: pointer;
+    background-color: rgb(18, 149, 52);
+    border:1px solid rgb(0, 129, 32);
+}
+
+.doneButton:disabled {
+    background-color: rgb(138, 255, 120);
+    border:1px solid rgb(138, 255, 120);
+    color: white;
+}
