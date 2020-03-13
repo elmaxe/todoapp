@@ -81,7 +81,7 @@ class Todo extends React.Component {
             </div>
             <div className="TodoCards">
                 {/* {this.props.state.todo.fetching ? "Loading..." : this.props.state.todo.todos.map(todo => <TodoItem todo={todo} actions={this.props.actions}/>)} */}
-                {this.props.state.todo.todos.map(todo => <TodoItem todo={todo} actions={this.props.actions}/>)}
+                {this.props.state.todo.todos.map(todo => <TodoItem todo={todo} actions={this.props.actions} state={this.props.state}/>)}
             </div>
         </div>
                 
@@ -143,7 +143,7 @@ class TodoItem extends React.Component {
         } else if (distance <= 24*1) {
             color = "red"
         }
-
+        console.log(this.props.state.todo.fetching)
         return (
             <div onMouseDown={this.handleClick.bind(this)} style={{backgroundColor: "rgb(249, 249, 249)"}}>
                     <CardModal todo={todo} enabled={this.state.enabled} cancel={this.cancel} changed={this.state.changed} actions={this.props.actions}/>
@@ -171,7 +171,7 @@ class TodoItem extends React.Component {
                         <button
                             className="doneButton"
                             onClick={this.markAsDone.bind(this)}
-                            disabled={this.state.removing}
+                            disabled={false}
                             >
                             {this.state.removing ? "Loading..." : "Mark as done"}
                         </button>
