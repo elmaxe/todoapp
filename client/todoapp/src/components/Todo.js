@@ -126,7 +126,7 @@ class TodoItem extends React.Component {
     }
 
     markAsDone() {
-        this.setState({removing: true})
+        // this.setState({removing: true})
         this.props.actions.removeTodo(this.props.todo.id)
     }
 
@@ -143,11 +143,11 @@ class TodoItem extends React.Component {
         } else if (distance <= 24*1) {
             color = "red"
         }
-        console.log(this.props.state.todo.fetching)
+        // console.log(this.props.state.todo.fetching)
         return (
             <div onMouseDown={this.handleClick.bind(this)} style={{backgroundColor: "rgb(249, 249, 249)"}}>
                     <CardModal todo={todo} enabled={this.state.enabled} cancel={this.cancel} changed={this.state.changed} actions={this.props.actions}/>
-                    <div className={"TodoCard" + " " + color}>
+                    <div className={"TodoCard " + color}>
                         <input
                             disabled
                             id="title"

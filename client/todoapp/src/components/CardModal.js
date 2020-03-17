@@ -68,7 +68,7 @@ class CardModal extends React.Component {
 
 
 
-        console.log(this.props.removing)
+        // console.log(this.props.removing)
         return (
             <div>
                 {this.props.enabled ?

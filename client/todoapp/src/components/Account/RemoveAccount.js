@@ -6,7 +6,7 @@ import history from '../../history'
 const RemoveAccount = ({actions}) => {
     const [disable, setDisabled] = useState(false)
     const [error, setError] = useState("")
-    console.log(actions)
+    // console.log(actions)
 
     const click = (e) => {
         if (window.confirm("Are you sure you want to remove your account? This can't be undone.")) {

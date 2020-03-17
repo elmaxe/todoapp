@@ -9,7 +9,6 @@ import setUser, {clearUser} from '../actions/userActions'
 import {bindActionCreators} from 'redux'
 
 import Alert from './Alert'
-import UserContext from './UserContext'
 import history from '../history'
 
 const initState = {
