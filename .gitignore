@@ -1,3 +1,4 @@
 
 /client/todoapp/node_modules
 /server/node_modules
+/logs/*
