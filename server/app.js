@@ -32,8 +32,20 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+const getDate = () => {
+    let date = new Date()
+    let year = date.getUTCFullYear()
+    let month = date.getUTCMonth()+1 < 10 ? "0"+(date.getUTCMonth()+1) : date.getUTCMonth()+1
+    let day = date.getUTCDate() < 10 ? "0"+date.getUTCDate() : date.getUTCDate()
+    date = year + "-" + month + "-" + day
+    return date
+}
+
 //Console logging
 app.use(morgan('dev'));
+app.use(morgan('common', {
+    stream: fs.createWriteStream('./logs/' + getDate() + '.log', {flags: 'a'})
+}))
 
 app.use(express.urlencoded({
     extended: true,
