@@ -158,7 +158,7 @@
 }
 
 .editButton {
-    opacity: 50%;
+    opacity: 0.5;
     cursor: pointer;
     background-color: white;
     border-radius: 5px;
