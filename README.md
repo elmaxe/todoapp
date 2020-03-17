@@ -21,7 +21,7 @@ Backend is at `localhost:4000`.
 ## Deploying
 1. Clone this repo
 2. Run `npm run build` in `client/todoapp/`
-3. TODO: Add instructions for building the server
+3. Run `node app.js` in `server/`
 
 # Links
 * [Server API](/server/api.md)
