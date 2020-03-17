@@ -55,7 +55,6 @@ class ChangePassword extends React.Component {
 
     render() {
         const {passwordOne, passwordTwo, error, success, fetching} = this.state
-        const {state} = this.props
 
         const isInvalid = passwordOne === '' || passwordTwo === '' || passwordOne  !== passwordTwo
 

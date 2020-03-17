@@ -12,23 +12,17 @@ import {clearUser} from '../actions/userActions'
 
     
     
-class NavBar extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-    
-    render() {
-        const state = this.props.state
-        const actions = this.props.actions
-        return (
-        <div>
-            {state.authenticated ? 
-            <Auth actions={actions} state={state}/>
-            :
-            state.fetching ? null : <NoAuth />}
-        </div>
-        )
-    }
+const NavBar = (props) => {
+    const state = props.state
+    const actions = props.actions
+    return (
+    <div>
+        {state.authenticated ? 
+        <Auth actions={actions} state={state}/>
+        :
+        state.fetching ? null : <NoAuth />}
+    </div>
+    )
 }
 
 const mapDispatchToProps = (dispatch) => ({

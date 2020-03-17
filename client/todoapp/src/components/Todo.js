@@ -147,7 +147,7 @@ class TodoItem extends React.Component {
         return (
             <div onMouseDown={this.handleClick.bind(this)} style={{backgroundColor: "rgb(249, 249, 249)"}}>
                     <CardModal todo={todo} enabled={this.state.enabled} cancel={this.cancel} changed={this.state.changed} actions={this.props.actions}/>
-                    <div className={"TodoCard" + " " + color}>
+                    <div className={"TodoCard " + color}>
                         <input
                             disabled
                             id="title"

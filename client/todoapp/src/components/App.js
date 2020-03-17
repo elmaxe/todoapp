@@ -1,13 +1,12 @@
 import React from 'react'
 
-import {BrowserRouter, Router, Switch, Route, Redirect} from 'react-router-dom'
+import {Router, Switch, Route} from 'react-router-dom'
 
 import {connect} from 'react-redux'
 
 import './App.css'
 import './NavBar.css'
 
-import UserContext from './UserContext'
 import Register from './Register'
 import Login from './Login'
 import NavBar from './NavBar'
