@@ -4,8 +4,8 @@ import RemoveAccount from './RemoveAccount'
 import './Account.css'
 
 const Account = ({state, actions}) =>  {
-    console.log(state)
-    console.log(actions)
+    // console.log(state)
+    // console.log(actions)
     let date = new Date(parseInt(state.auth.user.registrationDate, 10))
     let year = date.getUTCFullYear()
     let month = date.getUTCMonth()+1 < 10 ? "0"+(date.getUTCMonth()+1) : date.getUTCMonth()+1
