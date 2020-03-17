@@ -39,7 +39,7 @@ app.use(express.urlencoded({
     extended: true,
 }));
 
-const cookieMaxAge = 60*60*24
+const cookieMaxAge = 60*60*2
 
 app.use(session({
     name: "session",
