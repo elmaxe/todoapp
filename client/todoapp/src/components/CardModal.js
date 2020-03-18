@@ -64,10 +64,11 @@ class CardModal extends React.Component {
     }
 
     cancel() {
+        const {title, description, date} = this.props.todo
         this.setState({
-            title: this.props.todo.title,
-            description: this.props.todo.description,
-            date: this.props.todo.date
+            title,
+            description,
+            date
         })
         this.props.cancel()
     }
