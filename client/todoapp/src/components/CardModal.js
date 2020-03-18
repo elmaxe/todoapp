@@ -34,7 +34,7 @@ class CardModal extends React.Component {
         })
 
         this.setState({saving: true})
-        
+
         fetch('/api/todo/update', {
             method: "POST",
             credentials: "same-origin",
@@ -61,6 +61,16 @@ class CardModal extends React.Component {
     delete() {
         this.setState({deleting: true})
         this.props.actions.removeTodo(this.props.todo.id)
+    }
+
+    cancel() {
+        const {title, description, date} = this.props.todo
+        this.setState({
+            title,
+            description,
+            date
+        })
+        this.props.cancel()
     }
 
     render() {
@@ -91,7 +101,7 @@ class CardModal extends React.Component {
                                 onChange={this.handleChange}
                             />
                             <div className="DateAndAddRow">
-                                <input 
+                                <input
                                     id="date"
                                     type="date"
                                     name="date"
@@ -100,12 +110,13 @@ class CardModal extends React.Component {
                                 />
                             </div>
                             <button
-                                onClick={this.props.cancel}
+                                // onClick={this.props.cancel}
+                                onClick={this.cancel.bind(this)}
                                 id="cancelButton"
                                 >
                                 Cancel
                             </button>
-                            <button 
+                            <button
                                 onClick={this.delete.bind(this)}
                                 id="deleteButton"
                                 disabled={this.state.deleting || this.state.saving}
