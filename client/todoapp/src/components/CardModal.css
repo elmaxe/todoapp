@@ -64,6 +64,7 @@
 .CardModalContent #saveButton:disabled:hover {
     background-color: cornflowerblue;
     border:1px solid cornflowerblue;
+    cursor: not-allowed
 }
 .CardModalContent #saveButton:disabled {
     background-color: cornflowerblue;
@@ -114,6 +115,7 @@
 .CardModalContent #deleteButton:disabled:hover {
     background-color: rgb(208, 114, 114);
     border:1px solid rgb(208, 114, 114);
+    cursor: not-allowed;
 }
 .CardModalContent #deleteButton:disabled {
     background-color: rgb(208, 114, 114);

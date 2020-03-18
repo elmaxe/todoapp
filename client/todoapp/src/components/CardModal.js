@@ -76,7 +76,8 @@ class CardModal extends React.Component {
     render() {
         const {title, description, date} = this.state
 
-
+        const changed = this.props.todo.title !== title || this.props.todo.description !== description || this.props.todo.date !== date
+        console.log(changed)
 
         // console.log(this.props.removing)
         return (
@@ -126,7 +127,7 @@ class CardModal extends React.Component {
                             <button
                                 onClick={this.save}
                                 id="saveButton"
-                                disabled={this.state.deleting || this.state.saving}
+                                disabled={this.state.deleting || this.state.saving || !changed}
                                 >
                                 {this.state.saving ? "Saving..." : "Save"}
                             </button>
