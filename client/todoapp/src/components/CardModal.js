@@ -45,12 +45,17 @@ class CardModal extends React.Component {
         })
         .then(
             response => response.json(),
-            error => {
-                console.log(error)
-            }
+            // error => {
+            //     // console.log(error)
+            // }
         )
         .then(
             json => {
+                if (json.error) {
+                    this.props.cancel()
+                    this.setState({saving:false})
+                    return
+                }
                 this.props.actions.updateTodos(json.todos)
                 this.props.cancel()
                 this.setState({saving:false})
@@ -77,7 +82,6 @@ class CardModal extends React.Component {
         const {title, description, date} = this.state
 
         const changed = this.props.todo.title !== title || this.props.todo.description !== description || this.props.todo.date !== date
-        console.log(changed)
 
         // console.log(this.props.removing)
         return (
