@@ -35,7 +35,7 @@ export function fetchIsAuth() {
         .then(
             response => response.json(),
             error => {
-                console.log(error)
+                // console.log(error)
                 dispatch({type:FAILED_AUTH_FETCH})
             }
         )

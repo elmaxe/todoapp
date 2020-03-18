@@ -48,7 +48,7 @@ class ChangePassword extends React.Component {
                 this.setState({...initState}, () => {
                     this.setState({success:true})
                 })
-                console.log(json)
+                // console.log(json)
             }
         })
     }

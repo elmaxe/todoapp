@@ -23,7 +23,7 @@ export const auth = {
             if (this.authenticated) return true
             this.authenticated = json.authenticated
             this.user = json.user
-            console.log("Is auth (on start?): " + auth.authenticated)
+            // console.log("Is auth (on start?): " + auth.authenticated)
             return this.authenticated
         })
         //Check if authenticated

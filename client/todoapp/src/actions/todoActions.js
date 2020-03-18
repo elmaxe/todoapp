@@ -61,7 +61,7 @@ export function addTodo (title, description, dueDate) {
         .then(res => res.json())
         .then(json => {
             if (json.error) {
-                console.log(json.error)
+                // console.log(json.error)
                 //We got an error from server.
                 //Has our session expired? This will log us out in that case
                 dispatch(fetchIsAuth())
@@ -97,7 +97,7 @@ export function removeTodo(id) {
         )
         .then(json => {
             if (json.error) {
-                console.log(json.error)
+                // console.log(json.error)
                 dispatch(failTodoAction(json.error))
                 dispatch(fetchIsAuth())
             } else {

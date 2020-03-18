@@ -48,7 +48,7 @@ class Register extends React.Component {
         })
         .then(response => response.json())
         .then(json => {
-            console.log(json)
+            // console.log(json)
             if (!json.error) {
                 this.setState(() => ({...initState}), () => {
                     this.setState({success: json.status})

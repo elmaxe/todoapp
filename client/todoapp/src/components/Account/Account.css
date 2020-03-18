@@ -51,6 +51,7 @@ label {
 .ChangePassButton:disabled:hover {
     background-color: cornflowerblue;
     border:1px solid cornflowerblue;
+    cursor: not-allowed;
 }
 .ChangePassButton:disabled {
     background-color: cornflowerblue;
