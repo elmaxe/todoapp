@@ -1,3 +1,0 @@
-::ffff:127.0.0.1 - - [18/Mar/2020:15:28:37 +0000] "GET /api/login/isAuth HTTP/1.1" 200 93
-::ffff:127.0.0.1 - - [18/Mar/2020:15:28:37 +0000] "GET /api/todo/get HTTP/1.1" 304 -
-::ffff:127.0.0.1 - - [18/Mar/2020:15:28:45 +0000] "GET /api/todo/get HTTP/1.1" 304 -
