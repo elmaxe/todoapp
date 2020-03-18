@@ -28,6 +28,7 @@
 .LoginButton:disabled:hover {
     background-color: cornflowerblue;
     border:1px solid cornflowerblue;
+    cursor: not-allowed;
 }
 .LoginButton:disabled {
     background-color: cornflowerblue;
